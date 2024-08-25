@@ -928,3 +928,43 @@ rtctrlProfile:
   documentation:
     autoContinue: "The route_map_continue applies a continue statement for all user-configured sequences (contexts) in a given BGP route profile so that switches will continue to find matches with subsequent user-configured sequences in the route map. Without the continue statement, after a route matches one of the sequences in a route map, switches will not continue to check other sequences."
     type: "The type of the %s object. Use combinable when pervasive subnets (fvSubnet) and external subnets (l3extSubnet) should be combined with a route profile and merged into a single route map or route map entry. Use global when the route profile is the only source of information to generate a route map, this will overwrite other policy attributes."
+
+infraHPathS:
+  default_values:
+    parent_dn: "uni/infra"
+  test_values:
+    default:
+      name: "host_path_selector_default"
+    resource_required:
+      name: "host_path_selector"
+    datasource_required:
+      name: "host_path_selector"
+    datasource_non_existing:
+      name: "host_path_selector_non_existing"
+  parents:
+    - class_name: "infraInfra"
+      parent_dependency: ""
+      parent_dn: "uni/infra"
+
+infraRsHPathAtt:
+  parents:
+    - class_name: "infraHPathS"
+      target_classes:
+        - "fabricPathEp"
+  targets:
+    - class_name: "fabricPathEp"
+      target_dn: "topology/pod-1/paths-101/pathep-[eth1/1]"
+      relation_resource_name: "host_path"
+      static: true
+    
+infraRsPathToAccBaseGrp:
+  parents:
+    - class_name: "infraHPathS"
+      target_classes:
+        - "infraAccPortGrp"
+  targets:
+    - class_name: "infraAccPortGrp"
+      target_dn: "uni/infra/funcprof/accportgrp-access_interface_policy_group"
+      relation_resource_name: "access_interface_policy_group"
+      static: true
+

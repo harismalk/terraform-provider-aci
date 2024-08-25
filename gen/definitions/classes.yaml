@@ -567,5 +567,28 @@ fvIpAttr:
     - "uni/tn-{name}/ap-{name}/epg-{name}/crtrn/ipattr-{name}"
   contained_by:
     - "fvCrtrn"
+
 physDomP:
   resource_name: "physical_domain"
+
+infraHPathS:
+  ui_locations:
+    - "Fabric -> Access Policies -> Interfaces -> Leaf Interfaces -> Overrides"
+    - "Fabric -> Access Policies -> Interfaces -> Spine Interfaces -> Overrides"
+  sub_category: "Access Policies"
+  resource_name: "access_interface_override"
+
+infraRsHPathAtt:
+  ui_locations:
+    - "Fabric -> Access Policies -> Interfaces -> Leaf Interfaces -> Overrides"
+    - "Fabric -> Access Policies -> Interfaces -> Spine Interfaces -> Overrides"
+  sub_category: "Access Policies"
+  resource_name: "relation_to_host_path"
+  max_one_class_allowed: true
+
+infraRsPathToAccBaseGrp:
+  ui_locations:
+    - "Fabric -> Access Policies -> Interfaces -> Leaf Interfaces -> Overrides"
+    - "Fabric -> Access Policies -> Interfaces -> Spine Interfaces -> Overrides"
+  sub_category: "Access Policies"
+  resource_name: "relation_to_access_interface_policy_group"
